@@ -16,7 +16,7 @@ services:
       - 80:80
     labels:
       - 'carrier=traefik'
-    container_name: carrier-traefic
+    container_name: carrier-traefik
   postgres:
     image: postgres:12.2
     logging:

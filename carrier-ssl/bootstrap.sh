@@ -18,7 +18,7 @@ sed -i "s/INFLUX_USER/INFLUXUSERNAME/g" /installer/grafana/datasources/telegraf_
 sed -i "s/INFLUX_PASSWORD/INFLUXPASSWORD/g" /installer/grafana/datasources/telegraf_docker.yml
 GF_API_KEY=$(curl -H "Content-Type: application/json" --request POST --data '{"name":"admin","role":"Admin","secondsToLive":null}' $1://user:user@$2/grafana/api/auth/keys)
 key=$(echo "${GF_API_KEY}" | sed 's/{"name":"admin","key":"//' | sed 's/"}//')
-sed -i "s#GF_API_KEY=api_key#GF_API_KEY=$key#g" $3/carrier/.env
+sed -i "s#GF_API_KEY=api_key#GF_API_KEY=$key#g" $3/carrier-ssl/.env
 
 docker restart carrier-grafana
 docker exec carrier-influx bash -c "influx -execute \"create user INFLUXUSERNAME with password 'INFLUXPASSWORD' with all privileges;\""
